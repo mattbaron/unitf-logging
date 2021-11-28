@@ -12,6 +12,7 @@ module UnitF
     class Logger
       def initialize(level = INFO)
         @writers = []
+        @console = nil
         @level = ENV['UNITF_LOG_LEVEL'] || level
       end
 
@@ -45,6 +46,19 @@ module UnitF
         @level = level
         @writers.each do |writer|
           writer.level = level
+        end
+      end
+
+      def console
+        @writers.each do |writer|
+          return writer if writer.is_a?(UnitF::Logging::ConsoleWriter)
+        end
+        nil
+      end
+
+      def dump
+        @writers.each do |writer|
+          puts "Name: #{writer.name} Type: #{writer.class}"
         end
       end
 

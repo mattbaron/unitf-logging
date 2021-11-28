@@ -8,3 +8,4 @@ UnitF::Log.logger.level ='INFO'
 UnitF::Log.info("This is info 2")
 UnitF::Log.error("This is infor 3")
 
+UnitF::Log.logger.dump

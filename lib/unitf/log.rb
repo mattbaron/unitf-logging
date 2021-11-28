@@ -12,7 +12,9 @@ module UnitF
       end
 
       def to_file(file, max_files = 3, max_size = 1024000)
-        logger.add_writer(UnitF::Logging::FileWriter.new(file, max_files, max_size))
+        logger.add_writer(UnitF::Logging::FileWriter.new(file, max_files: max_files, max_size: max_size))
+      rescue Errno::ENOENT => e
+        logger.warn("Unble to create FileWriter for #{file}")
       end
 
       def debug(message)
