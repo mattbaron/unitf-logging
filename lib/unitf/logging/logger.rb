@@ -10,10 +10,9 @@ module UnitF
     FATAL = ::Logger::Severity::FATAL
 
     class Logger
-      def initialize(level = INFO)
+      def initialize
         @writers = []
-        @console = nil
-        @level = ENV['UNITF_LOG_LEVEL'] || level
+        self.level = ENV['UNITF_LOG_LEVEL'] || INFO
       end
 
       def add_writer(writer)
@@ -41,12 +40,14 @@ module UnitF
         write(FATAL, message)
       end
 
-      def level=(level)
-        level = UnitF::Logging.const_get(level.upcase) if level.is_a?(String)
-        @level = level
+      def level=(new_level)
+        new_level = UnitF::Logging.const_get(new_level.upcase) if new_level.is_a?(String)
+        @level = new_level
         @writers.each do |writer|
-          writer.level = level
+          writer.level = @level
         end
+      rescue ArgumentError, NameError
+        self.level = INFO
       end
 
       def console
