@@ -7,13 +7,21 @@ module UnitF
         @logger ||= UnitF::Logging::Logger.new
       end
 
+      def level=(level)
+        @logger.level = level
+      end
+
+      def level
+        @logger.level
+      end
+
       def to_console
         logger.add_writer(UnitF::Logging::ConsoleWriter.new)
       end
 
       def to_file(file, max_files = 3, max_size = 1024000)
         logger.add_writer(UnitF::Logging::FileWriter.new(file, max_files: max_files, max_size: max_size))
-      rescue Errno::ENOENT => e
+      rescue Errno::ENOENT
         logger.warn("Unble to create FileWriter for #{file}")
       end
 

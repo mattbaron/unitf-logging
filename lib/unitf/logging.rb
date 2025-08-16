@@ -5,9 +5,16 @@ require_relative "logging/logger"
 require_relative "logging/writer"
 require_relative "log"
 
-module Unitf
+module UnitF
   module Logging
+    class << self
+      def encode_level(level)
+        return level if level.is_a?(Integer)
+
+        const_get(level.to_s.upcase)
+      end
+    end
+
     class Error < StandardError; end
-    # Your code goes here...
   end
 end

@@ -3,7 +3,6 @@ require 'logger'
 module UnitF
   module Logging
     class Writer < ::Logger
-
       attr_reader :name
 
       def initialize(file, max_files: 3, max_size: 1024000, name: 'none')
