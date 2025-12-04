@@ -1,0 +1,47 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - workflows
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1 # Sets up Ruby
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+
+  # # Job 2: Code Quality Check (Runs only after Job 1 succeeds)
+  # lint-check:
+  #   # 4. Job Dependency
+  #   needs: build-and-test 
+    
+  #   # 3a. Runner Environment
+  #   runs-on: ubuntu-latest
+
+  #   # 3b. Job Steps
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v4
+        
+  #     # Step 1: Setup Environment Action (Reusable Action)
+  #     - name: Setup Node.js Environment
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20'
+  #         cache: 'npm'
+
+  #     # Step 2: Run Shell Command (Run Linter)
+  #     - name: Run Linter
+  #       run: npm run lint
