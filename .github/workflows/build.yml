@@ -35,5 +35,11 @@ jobs:
         with:
           ruby-version: '3.4'
           bundler-cache: true
+      - name: Clean Gems
+        run: /bin/rm -f *.gem
       - name: Build Gem
         run: gem build
+      - name: Push Gem
+        env:
+          GEM_HOST_API_KEY: ${{ secrets.GEM_HOST_API_KEY }}
+        run: gem push *.gem
