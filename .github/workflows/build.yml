@@ -17,10 +17,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1 # Sets up Ruby
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.4'
           bundler-cache: true
+      - name: Build Gem
+        run: gem build
 
   # # Job 2: Code Quality Check (Runs only after Job 1 succeeds)
   # lint-check:
