@@ -5,7 +5,7 @@ module UnitF
     class Writer < ::Logger
       attr_reader :name
 
-      def initialize(file, max_files: 3, max_size: 1024000, name: 'none')
+      def initialize(file, max_files: 3, max_size: 1_024_000, name: 'none')
         super(file, max_files, max_size)
         @name = name
       end
@@ -26,8 +26,9 @@ end
 module UnitF
   module Logging
     class FileWriter < UnitF::Logging::Writer
-      def initialize(file, max_files: 3, max_size: 1024000, name: 'none')
-        super(file, max_files: max_files, max_size: max_size, name: name)
+      def initialize(file, max_files: 3, max_size: 1_024_000, name: 'none')
+        # super(file, max_files: max_files, max_size: max_size, name: name)
+        super
       end
     end
   end

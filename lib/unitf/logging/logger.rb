@@ -2,7 +2,6 @@ require 'logger'
 
 module UnitF
   module Logging
-
     DEBUG = ::Logger::Severity::DEBUG
     INFO = ::Logger::Severity::INFO
     WARN = ::Logger::Severity::WARN
@@ -10,8 +9,8 @@ module UnitF
     FATAL = ::Logger::Severity::FATAL
 
     class Logger
-      attr_accessor :level
-      
+      # attr_accessor :level
+
       def initialize
         @writers = []
         self.level = ENV['UNITF_LOG_LEVEL'] || ENV['UNITF_LOGGING_LEVEL'] || INFO
