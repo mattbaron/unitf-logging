@@ -21,7 +21,6 @@ jobs:
         with:
           ruby-version: '3.4'
           bundler-cache: true
-      - run: find / -name rubocop
       - name: RuboCop
         run: bundle exec rubocop
 
